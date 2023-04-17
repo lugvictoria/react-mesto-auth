@@ -1,5 +1,5 @@
 import React from "react";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
@@ -22,21 +22,21 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   // Выбранная карточка для попапа с картинкой
   const [selectedCard, setSelectedCard] = React.useState({});
-// Пользователь
+  // Пользователь
   const [currentUser, setCurrentUser] = React.useState({});
-// Карточки
+  // Карточки
   const [cards, setCards] = React.useState([]);
 
- /**
-   * Получение информации о пользователе при открытии страницы
-   */
+  /**
+    * Получение информации о пользователе при открытии страницы
+    */
   React.useEffect(() => {
     api.getUserInfo().then(setCurrentUser).catch(console.error);
   }, []);
 
-    /**
-   * Получение исходных карточек для отображения на странице
-   */
+  /**
+ * Получение исходных карточек для отображения на странице
+ */
   React.useEffect(() => {
     api
       .getInitialCards()
@@ -45,7 +45,7 @@ function App() {
       })
       .catch(console.error);
   }, []);
-// Функции открытия/закрытия попапов
+  // Функции открытия/закрытия попапов
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -125,49 +125,89 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Header />
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
-        <Footer />
+    <BrowserRouter>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="page">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Header />
+              }
+            />
+            <Route
+              path="sign-up"
+              element={
+                <Header />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <Header />
+              }
+            />
+          </Routes>
 
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlace}
-        />
-        <PopupWithForm
-          name="confirm"
-          title="Вы уверены?"
-          buttonText="Да"
-          isOpen={false}
-          onClose={closeAllPopups}
-        />
-        <ImagePopup
-          card={selectedCard}
-          onClose={closeAllPopups}
-          isOpen={isImagePopupOpen}
-        />
-      </div>
-    </CurrentUserContext.Provider>
+          <main>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    cards={cards}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
+                  />
+                }
+              />
+
+              <Route
+                path="sign-up"
+              />
+
+              <Route
+                path="*"
+              />
+            </Routes>
+          </main>
+
+          <Footer />
+
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlace}
+          />
+          <PopupWithForm
+            name="confirm"
+            title="Вы уверены?"
+            buttonText="Да"
+            isOpen={false}
+            onClose={closeAllPopups}
+          />
+          <ImagePopup
+            card={selectedCard}
+            onClose={closeAllPopups}
+            isOpen={isImagePopupOpen}
+          />
+        </div>
+      </CurrentUserContext.Provider>
+    </BrowserRouter>
   );
 }
 

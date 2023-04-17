@@ -15,7 +15,7 @@ function Main({
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
-    <main>
+    <>
       <section className="profile">
         <div className="profile__table">
           <div className="profile__avatar-outside">
@@ -64,7 +64,7 @@ function Main({
           />
         ))}
       </section>
-    </main>
+    </>
   );
 }
 
