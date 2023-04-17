@@ -9,6 +9,9 @@ import PopupWithForm from "./PopupWithForm";
 import EditAvatarPopup from "./EditAvatarPopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
+import ConfirmActionPopup from "./ConfirmActionPopup";
+import Register from "./Register";
+import Login from "./Login";
 
 import api from "../utils/api";
 
@@ -168,10 +171,12 @@ function App() {
 
               <Route
                 path="sign-up"
+                element={ <Register /> }
               />
 
               <Route
                 path="*"
+                element={ <Login /> }
               />
             </Routes>
           </main>
