@@ -128,7 +128,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           <Routes>
@@ -177,12 +177,12 @@ function App() {
               />
 
               <Route
-                path="sign-up"
-                element={<Register />}
+              path="/sign-up"
+              element={<Register />}
               />
 
               <Route
-                path="*"
+                path="/sign-in"
                 element={<Login />}
               />
             </Routes>
