@@ -10,6 +10,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmActionPopup from "./ConfirmActionPopup";
+import InfoPopup from "./InfoPopup";
 import Register from "./Register";
 import Login from "./Login";
 
@@ -22,9 +23,11 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   // Выбранная карточка для попапа с картинкой
   const [selectedCard, setSelectedCard] = React.useState({});
+  const [toBeDeletedCard, setToBeDeletedCard] = React.useState(null);
   // Пользователь
   const [currentUser, setCurrentUser] = React.useState({});
   // Карточки
@@ -65,8 +68,9 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setIsImagePopupOpen(false);
-    setSelectedCard({});
+    setSelectedCard(null);
+    setToBeDeletedCard(null);
+    setIsInfoPopupOpen(false);
   }
 
   function handleCardClick(card) {
@@ -177,8 +181,8 @@ function App() {
               />
 
               <Route
-              path="/sign-up"
-              element={<Register />}
+                path="/sign-up"
+                element={<Register />}
               />
 
               <Route
@@ -212,10 +216,13 @@ function App() {
             isOpen={false}
             onClose={closeAllPopups}
           />
-          <ImagePopup
-            card={selectedCard}
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+          <InfoPopup
+            message="Успешно!"
+            isSuccessful={true}
+            isOpened={isInfoPopupOpen}
             onClose={closeAllPopups}
-            isOpen={isImagePopupOpen}
           />
         </div>
       </CurrentUserContext.Provider>
