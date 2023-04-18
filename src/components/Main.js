@@ -16,7 +16,7 @@ function Main({
 
   return (
     <>
-      <section className="profile">
+      <section className="profile content__element">
         <div className="profile__table">
           <div className="profile__avatar-outside">
             <button
@@ -53,7 +53,7 @@ function Main({
         </div>
       </section>
 
-      <section className="cards">
+      <section className="cards content__element">
         {cards.map((card) => (
           <Card
             card={card}

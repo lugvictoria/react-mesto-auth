@@ -9,7 +9,7 @@ function PopupWithForm({
 }) {
   return (
     <div className={`popup popup_type_${name}` + (isOpen && " popup_opened")}>
-      <div className="popup__container">
+      <div className="popup__container content__element">
         <button
           className="popup__button-close"
           type="button"
