@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, Navigate } from "react-router-dom";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
@@ -30,6 +30,9 @@ function App() {
   const [toBeDeletedCard, setToBeDeletedCard] = React.useState(null);
   // Пользователь
   const [currentUser, setCurrentUser] = React.useState({});
+  // Авторизация пользователя
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
   // Карточки
   const [cards, setCards] = React.useState([]);
 
@@ -139,35 +142,7 @@ function App() {
             <Route
               path="/"
               element={
-                <Header>
-                  <p className="header__menu-item">Email</p>
-                  <button href="#" className="header__menu-item">Выйти</button>
-                </Header>
-              }
-            />
-            <Route
-              path="sign-up"
-              element={
-                <Header>
-                  <Link to="/sign-in" className="header__menu-item">Войти</Link>
-                </Header>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <Header>
-                  <Link to="/sign-up" className="header__menu-item">Регистрация</Link>
-                </Header>
-              }
-            />
-          </Routes>
-
-          <main>
-            <Routes>
-              <Route
-                path="/"
-                element={
+                loggedIn ? (
                   <Main
                     onEditProfile={handleEditProfileClick}
                     onAddPlace={handleAddPlaceClick}
@@ -177,23 +152,26 @@ function App() {
                     onCardLike={handleCardLike}
                     onCardDelete={handleCardDelete}
                   />
-                }
-              />
+                ) : (
+                  <Navigate to="/sign-in" />
+                )
+              }
+            />
+            <Route path="/sign-up" element={<Register />} />
 
-              <Route
-                path="/sign-up"
-                element={<Register />}
-              />
+            <Route path="/sign-in" element={<Login />} />
 
-              <Route
-                path="/sign-in"
-                element={<Login />}
-              />
-            </Routes>
-          </main>
-
+            <Route path="*" element={
+              loggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Navigate to="/sign-in" />
+              )
+            } />
+          </Routes>
           <Footer />
 
+          {/* Попапы */}
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}

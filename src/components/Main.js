@@ -1,6 +1,10 @@
+
+
+
 import React from "react";
 
 import Card from "./Card.js";
+import Header from "./Header";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function Main({
