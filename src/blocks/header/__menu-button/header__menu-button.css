@@ -21,9 +21,12 @@
 
 @media (max-width: 425px) {
   .header__menu-button {
-    display: block;
+    margin-right: 30px;
   }
 }
-.header__menu-button:hover {
-  opacity: .6;
+
+@media (max-width: 768px) {
+  .header__menu-button {
+    display: block;
+  }
 }
