@@ -9,7 +9,6 @@
 
 * [Mesto](https://lugvictoria.github.io/mesto)
 * [Место (версия на React)](https://lugvictoria.github.io/mesto-react)
-
 * Mesto (версия на авторизацией и регистрацией) ⬅ этот репозиторий
 * Mesto (версия для сервера)
 * Mesto (версия с фронтендом и бэкендом)
@@ -20,11 +19,9 @@
 
 ** защищенные маршруты
 ** авторизация через JWT
-** работа с Local Starage
+** работа с Local Storage
 
-Открыть сайт в браузере
-
-https://lugvictoria.github.io/react-mesto-auth
+Открыть сайт в браузере https://lugvictoria.github.io/react-mesto-auth
 
 Статус разработки
 ✅ В разработке

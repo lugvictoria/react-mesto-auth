@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
@@ -135,19 +135,26 @@ function App() {
             <Route
               path="/"
               element={
-                <Header />
+                <Header>
+                  <p className="header__menu-item">Email</p>
+                  <button href="#" className="header__menu-item">Выйти</button>
+                </Header>
               }
             />
             <Route
               path="sign-up"
               element={
-                <Header />
+                <Header>
+                  <Link to="/sign-in" className="header__menu-item">Войти</Link>
+                </Header>
               }
             />
             <Route
               path="*"
               element={
-                <Header />
+                <Header>
+                  <Link to="/sign-up" className="header__menu-item">Регистрация</Link>
+                </Header>
               }
             />
           </Routes>
@@ -171,12 +178,12 @@ function App() {
 
               <Route
                 path="sign-up"
-                element={ <Register /> }
+                element={<Register />}
               />
 
               <Route
                 path="*"
-                element={ <Login /> }
+                element={<Login />}
               />
             </Routes>
           </main>
