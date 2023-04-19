@@ -16,15 +16,19 @@
   /* Расположение в сетке */
   display: none;
   grid-area: button;
-  margin-right: 30px;
 }
 
 @media (max-width: 425px) {
   .header__menu-button {
-    display: block;
+    margin-right: 30px;
   }
 }
 
+@media (max-width: 768px) {
+  .header__menu-button {
+    display: block;
+  }
+}
 .header__menu-button:hover {
   opacity: .6;
 }
