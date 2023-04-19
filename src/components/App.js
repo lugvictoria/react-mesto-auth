@@ -10,6 +10,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import ConfirmActionPopup from "./ConfirmActionPopup";
 import Register from "./Register";
 import Login from "./Login";
+import InfoPopup from "./InfoPopup";
 
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
@@ -22,6 +23,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   // Выбранные карточки для обрабтки попапами
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [toBeDeletedCard, setToBeDeletedCard] = React.useState(null);
@@ -63,6 +65,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
     setToBeDeletedCard(null);
+    setIsInfoPopupOpen(false);
   }
 
   function handleCardClick(card) {
@@ -215,6 +218,12 @@ function App() {
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <InfoPopup
+            message="Успешно!"
+            isSuccessful={true}
+            isOpened={isInfoPopupOpen}
+            onClose={closeAllPopups}
+          />
         </div>
       </CurrentUserContext.Provider>
     </BrowserRouter>
