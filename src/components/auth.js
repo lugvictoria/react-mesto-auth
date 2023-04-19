@@ -59,3 +59,5 @@ export function checkToken(token) {
       });
     });
 }
+
+export default auth;
