@@ -53,7 +53,7 @@
 @import url(../src/blocks/popup/__title/popup__title.css);
 @import url(../src/blocks/popup/__form/popup__form.css);
 
-@import url(../src/blocks/popup/__button-close/popup__button-close.css);
+@import url(../src/blocks/popup/__cancel-button/popup__cancel-button.css);
 @import url(../src/blocks/popup/__save-button/popup__save-button.css);
 @import url(../src/blocks/popup/__save-button/popup__save-button.css);
 @import url(../src/blocks/popup/__save-button/_disabled/popup__save-button_disabled.css);

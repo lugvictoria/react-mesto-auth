@@ -5,7 +5,7 @@ function ImagePopup(props) {
     >
       <figure className="popup__picture-container">
         <button
-          className="popup__button-close"
+          className="popup__cancel-button"
           type="button"
           aria-label="Закрыть окно"
           onClick={props.onClose}

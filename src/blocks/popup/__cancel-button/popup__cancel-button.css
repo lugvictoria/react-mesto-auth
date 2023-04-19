@@ -1,4 +1,4 @@
-.popup__button-close {
+.popup__cancel-button {
   position: absolute;
   right: -38px;
   top: -38px;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 450px) {
-  .popup__button-close {
+  .popup__cancel-button {
     width: 20px;
     height: 20px;
     right: 0px;
@@ -24,6 +24,6 @@
   }
 }
 
-.popup__button-close:hover {
+.popup__cancel-button:hover {
   opacity: 0.6;
 }

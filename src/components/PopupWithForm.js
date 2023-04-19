@@ -11,7 +11,7 @@ function PopupWithForm({
     <div className={`popup popup_type_${name}` + (isOpen && " popup_opened")}>
       <div className="popup__container content__element">
         <button
-          className="popup__button-close"
+          className="popup__cancel-button"
           type="button"
           aria-label="Закрыть"
         ></button>
@@ -27,7 +27,7 @@ function PopupWithForm({
           </button>
         </form>
         <button
-          className="popup__button-close"
+          className="popup__cancel-button"
           type="button"
           aria-label="Закрыть окно"
           onClick={onClose}
