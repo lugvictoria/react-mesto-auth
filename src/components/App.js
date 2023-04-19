@@ -136,8 +136,8 @@ function App() {
               path="/"
               element={
                 <Header isWrappable={true}>
-                    <p className="header__menu-item">email@email.ru</p>
-                    <button href="#" className="header__menu-item">Выйти</button>
+                  <p className="header__menu-item">email@email.ru</p>
+                  <button href="#" className="header__menu-item">Выйти</button>
                 </Header>
               }
             />
@@ -145,8 +145,8 @@ function App() {
               path="sign-up"
               element={
                 <Header>
-                <Link to="/sign-in" className="header__menu-item">Войти</Link>
-              </Header>
+                  <Link to="/sign-in" className="header__menu-item">Войти</Link>
+                </Header>
               }
             />
             <Route
@@ -177,13 +177,13 @@ function App() {
               />
 
               <Route
-                path="sign-up"
-                element={ <Register /> }
+                path="/sign-up"
+                element={<Register />}
               />
 
               <Route
-                path="*"
-                element={ <Login /> }
+                path="/sign-in"
+                element={<Login />}
               />
             </Routes>
           </main>
