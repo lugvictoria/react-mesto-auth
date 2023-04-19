@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 
 import Card from "./Card.js";
@@ -20,54 +17,60 @@ function Main({
 
   return (
     <>
-      <section className="profile content__element">
-        <div className="profile__table">
-          <div className="profile__avatar-outside">
-            <button
-              className="profile__avatar-button"
-              type="button"
-              aria-label="Изменить аватар"
-              onClick={onEditAvatar}
-            >
+      <Header isWrappable={true}>
+        <p className="header__menu-item">email@email.ru</p>
+        <button href="#" className="header__menu-item">Выйти</button>
+      </Header>
+      <main>
+        <section className="profile content__element">
+          <div className="profile__table">
+            <div className="profile__avatar-outside">
               <img
                 className="profile__avatar-image"
                 src={currentUser.avatar}
                 alt="аватар"
               />
-            </button>
-          </div>
-          <div className="profile__info">
-            <div className="profile__edit">
-              <h1 className="profile__title">{currentUser.name}</h1>
               <button
-                className="profile__button-edit"
+                className="profile__avatar-button"
                 type="button"
-                aria-label="Редактировать профиль"
-                onClick={onEditProfile}
-              ></button>
+                aria-label="Изменить аватар"
+                onClick={onEditAvatar}
+              >
+              </button>
             </div>
-            <p className="profile__subtitle">{currentUser.about}</p>
+            <div className="profile__info">
+              <div className="profile__edit">
+                <h1 className="profile__title">{currentUser.name}</h1>
+                <button
+                  className="profile__button-edit"
+                  type="button"
+                  aria-label="Редактировать профиль"
+                  onClick={onEditProfile}
+                ></button>
+              </div>
+              <p className="profile__subtitle">{currentUser.about}</p>
+            </div>
+            <button
+              className="profile__button-add"
+              type="button"
+              aria-label="Добавить"
+              onClick={onAddPlace}
+            ></button>
           </div>
-          <button
-            className="profile__button-add"
-            type="button"
-            aria-label="Добавить"
-            onClick={onAddPlace}
-          ></button>
-        </div>
-      </section>
+        </section>
 
-      <section className="cards content__element">
-        {cards.map((card) => (
-          <Card
-            card={card}
-            key={card._id}
-            onCardClick={onCardClick}
-            onCardLike={onCardLike}
-            onCardDelete={onCardDelete}
-          />
-        ))}
-      </section>
+        <section className="cards content__element">
+          {cards.map((card) => (
+            <Card
+              card={card}
+              key={card._id}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
+          ))}
+        </section>
+      </main>
     </>
   );
 }
