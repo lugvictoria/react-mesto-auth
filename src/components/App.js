@@ -128,7 +128,7 @@ function App() {
   }
 
   return (
-       <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="content">
           <Routes>
