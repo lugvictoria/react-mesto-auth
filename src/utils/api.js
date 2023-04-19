@@ -14,10 +14,6 @@ class Api {
     this._headers = headers;
   }
 
-  _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`${res.status}`);
-  }
-
   /**
    * Получает данные текущего пользователя
    * @returns {Promise} Промис с ответом сервера: объект текущего пользователя
@@ -29,7 +25,10 @@ class Api {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -51,7 +50,10 @@ class Api {
         about,
       }),
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -70,7 +72,10 @@ class Api {
         avatar: link,
       }),
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -85,7 +90,10 @@ class Api {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -107,7 +115,10 @@ class Api {
         link,
       }),
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -123,7 +134,10 @@ class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return Promise.resolve();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -139,7 +153,10 @@ class Api {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -155,7 +172,10 @@ class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      return this._checkResponse(res);
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
     });
   }
 

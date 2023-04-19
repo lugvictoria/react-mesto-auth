@@ -1,27 +1,13 @@
 .card__image {
-  display: block;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  object-position: center;
+  width: 100%;
+  /* aspect-ratio: 1;  Не поддерживается Практикумом */
   height: 282px;
   object-fit: cover;
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  object-position: center;
+  background-color: #111;
+  transition: opacity .3s;
 }
-
-@media screen and (max-width: 550px) {
-  .card__image {
-    max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .card__image {
-    max-width: 282px;
-  }
-}
-
 
 .card__image:hover {
-  cursor: pointer;
+  opacity: .9;
 }

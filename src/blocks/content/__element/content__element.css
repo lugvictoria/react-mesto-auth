@@ -1,4 +1,4 @@
-/* Центрируем все секции страницы по центру с полями справа и слева */
+/* Центрирование всех секций страницы по центру с полями справа и слева */
 .content__element {
   margin-left: auto;
   margin-right: auto;
@@ -12,6 +12,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  .content__element {
+    width: calc(100% - 2 * 48px); /* Поля 48px */
+  }
+}
+
+@media screen and (max-width: 425px) {
   .content__element {
     width: calc(100% - 2 * 19px); /* Поля 19px */
   }

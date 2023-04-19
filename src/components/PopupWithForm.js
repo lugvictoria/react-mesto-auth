@@ -10,15 +10,11 @@ function PopupWithForm({
   return (
     <div className={`popup popup_type_${name}` + (isOpen && " popup_opened")}>
       <div className="popup__container content__element">
-        <button
-          className="popup__cancel-button"
-          type="button"
-          aria-label="Закрыть"
-        ></button>
         <h2 className="popup__title">{title}</h2>
         <form
           className="popup__form"
           name={name}
+          noValidate
           onSubmit={onSubmit}
         >
           {children}

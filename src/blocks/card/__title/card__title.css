@@ -1,18 +1,12 @@
 .card__title {
-  color: black;
-  max-width: 170px;
-  overflow: hidden;
+  margin: 0; /* Сброс стандартных стилей */
+  color: #000;
+  font-style: normal;
   font-weight: 900;
   font-size: 24px;
-  line-height: 29px;
-  text-align: center;
+  line-height: 1.21;
+  /* При переполнении текст обрезается */
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-@media screen and (max-width: 319px) {
-  .card__title {
-    font-size: 18px;
-    line-height: 21px;
-  }
+  overflow: hidden;
 }

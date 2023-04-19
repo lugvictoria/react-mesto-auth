@@ -1,19 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, Link, Navigate } from "react-router-dom";
 
-import Footer from "./Footer.js";
-import Main from "./Main.js";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
-import PopupWithForm from "./PopupWithForm";
 import EditAvatarPopup from "./EditAvatarPopup";
-import CurrentUserContext from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmActionPopup from "./ConfirmActionPopup";
-import InfoPopup from "./InfoPopup";
-import Register from "./Register";
-import Login from "./Login";
-import ProtectedRoute from "./ProtectedRoute";
+
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 import api from "../utils/api";
 
@@ -24,30 +20,20 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
-  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
-  // Выбранная карточка для попапа с картинкой
-  const [selectedCard, setSelectedCard] = React.useState({});
+  // Выбранные карточки для обрабтки попапами
+  const [selectedCard, setSelectedCard] = React.useState(null);
   const [toBeDeletedCard, setToBeDeletedCard] = React.useState(null);
   // Пользователь
   const [currentUser, setCurrentUser] = React.useState({});
-  // Авторизация пользователя
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
   // Карточки
   const [cards, setCards] = React.useState([]);
 
   /**
-    * Получение информации о пользователе при открытии страницы
-    */
+   * Получение информации о пользователе и исходных карточек при открытии страницы
+   */
   React.useEffect(() => {
     api.getUserInfo().then(setCurrentUser).catch(console.error);
-  }, []);
 
-  /**
- * Получение исходных карточек для отображения на странице
- */
-  React.useEffect(() => {
     api
       .getInitialCards()
       .then((res) => {
@@ -55,6 +41,7 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
   // Функции открытия/закрытия попапов
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -74,12 +61,10 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
     setToBeDeletedCard(null);
-    setIsInfoPopupOpen(false);
   }
 
   function handleCardClick(card) {
     setSelectedCard(card);
-    setIsImagePopupOpen(true);
   }
 
   // Функции с изменением/обновлением данных на странице
@@ -115,16 +100,6 @@ function App() {
       .catch(console.error);
   }
 
-  function handleCardDelete(card) {
-    const cardId = card._id;
-    api
-      .deleteCard(cardId)
-      .then(() => {
-        setCards((state) => state.filter((card) => card._id !== cardId));
-      })
-      .catch(console.error);
-  }
-
   function handleAddPlace(newPlaceData) {
     api
       .addNewCard(newPlaceData)
@@ -135,75 +110,65 @@ function App() {
       .catch(console.error);
   }
 
+  function handleCardDelete(card) {
+    setToBeDeletedCard(card);
+  }
+
+  function handleConfirmDelete() {
+    const cardId = toBeDeletedCard._id;
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((card) => card._id !== cardId));
+        closeAllPopups();
+      })
+      .catch(console.error);
+  }
+
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <CurrentUserContext.Provider value={currentUser}>
-        <div className="page">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute isLoggiedIn={isLoggedIn}>
-                  <Main
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    cards={cards}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                  />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/sign-up" element={<Register />} />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="content">
+        <Header />
 
-            <Route path="/sign-in" element={<Login />} />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+        />
 
-            <Route path="*" element={
-            isLoggedIn ? (
-                <Navigate to="/" />
-              ) : (
-                <Navigate to="/sign-in" />
-              )
-            } />
-          </Routes>
-          <Footer />
+        <Footer />
 
-          {/* Попапы */}
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlace}
-          />
-          <PopupWithForm
-            name="confirm"
-            title="Вы уверены?"
-            buttonText="Да"
-            isOpen={false}
-            onClose={closeAllPopups}
-          />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-          <InfoPopup
-            message="Успешно!"
-            isSuccessful={true}
-            isOpened={isInfoPopupOpen}
-            onClose={closeAllPopups}
-          />
-        </div>
-      </CurrentUserContext.Provider>
-    </BrowserRouter>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlace}
+        />
+
+        <ConfirmActionPopup
+          isOpen={!!toBeDeletedCard}
+          onClose={closeAllPopups}
+          onConfirm={handleConfirmDelete}
+        />
+
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

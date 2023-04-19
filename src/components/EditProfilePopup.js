@@ -11,7 +11,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   /**
    * Сброс значений инпутов при открытии/закрытии попапа или при смене пользователя
    */
-
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
@@ -44,22 +43,30 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label className="popup__form">
+      <label className="popup__field">
         <input
           type="text"
-          className="popup__input  popup__input_place_name"
-          placeholder="Введите имя и фамилию"
+          className="popup__input popup__input_type_name"
+          placeholder="Имя"
+          name="name"
+          id="name-input"
+          minLength="2"
+          maxLength="40"
           required
           onChange={handleChangeName}
           value={name ?? ""}
         />
         <span className="popup__input-error name-input-error"></span>
       </label>
-      <label className="popup__form">
+      <label className="popup__field">
         <input
           type="text"
-          className="popup__input  popup__input_place_name"
-          placeholder="Введите профессию"
+          className="popup__input popup__input_type_job"
+          id="job-input"
+          placeholder="Профессия"
+          name="job"
+          minLength="2"
+          maxLength="200"
           required
           onChange={handleChangeDescription}
           value={description ?? ""}

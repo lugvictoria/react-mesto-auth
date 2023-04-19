@@ -3,7 +3,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwner = card.owner._id === currentUser._id;
   const isLiked = card.likes.some((person) => person._id === currentUser._id);
   const activeLikeButtonClassName = "card__like-button_active";
 
@@ -27,9 +27,9 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         className="card__image"
         onClick={handleCardClick}
       />
-      <div className="card__group">
+      <div className="card__description">
         <h2 className="card__title">{card.name}</h2>
-        <div className="card__like-button-group">
+        <div className="card__like">
           <button
             type="button"
             className={
@@ -38,21 +38,20 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
             aria-label="Добавить в избранное"
             onClick={handleCardLike}
           ></button>
-          <span className="card__like-count">{card.likes.length}</span>
+          <span className="card__like-count"></span>
         </div>
       </div>
-      {isOwn && (
+
+      {isOwner && (
         <button
-          aria-label="Удалить"
           type="button"
           className="card__delete-button"
+          aria-label="Удалить"
           onClick={handleCardDelete}
-        />
+        ></button>
       )}
     </div>
   );
 }
 
 export default Card;
-
-

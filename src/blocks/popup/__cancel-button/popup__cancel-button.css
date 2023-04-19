@@ -1,29 +1,33 @@
 .popup__cancel-button {
+  /* Позиционирование вне формы */
   position: absolute;
-  right: -38px;
-  top: -38px;
-  background-image: url("../../../images/CloseIcon.svg");
-  background-color: rgba(255, 255, 255, 0);
-  border: 0;
-  background-repeat: no-repeat;
-  display: block;
-  background-size: cover;
+  top: 0;
+  right: 0;
+  transform: translate(calc(100% + 8px), calc(-100% - 8px));
+  /* Размеры кнопки */
   width: 32px;
   height: 32px;
-  padding: 0;
+  /* Внешний вид */
   cursor: pointer;
-  transition: opacity 0.3s;
-}
-
-@media screen and (max-width: 450px) {
-  .popup__cancel-button {
-    width: 20px;
-    height: 20px;
-    right: 0px;
-    top: -36px;
-  }
+  border: 0;
+  /* Фоновое изображение */
+  background-color: transparent;
+  background-image: url(../../../images/icon__close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  /* Анимация при наведении */
+  transition: opacity .2s;
 }
 
 .popup__cancel-button:hover {
-  opacity: 0.6;
+  opacity: .6;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__cancel-button {
+    width: 20px;
+    height: 20px;
+    transform: translateY(calc(-100% + -16px)); /* Перенос кнопки в другое место */
+  }
 }
