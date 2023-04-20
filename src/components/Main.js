@@ -15,6 +15,7 @@ function Main({
   onCardLike,
   onCardDelete,
   email,
+  onLogout,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -22,7 +23,9 @@ function Main({
     <>
       <Header isWrappable={true}>
         <p className="header__menu-item">{email}</p>
-        <button href="#" className="header__menu-item">Выйти</button>
+        <button href="#" className="header__menu-item" onClick={onLogout}>
+          Выйти
+        </button>
       </Header>
 
       <main>
