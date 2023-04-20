@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import * as auth from "../utils/auth";
+import auth from "../utils/auth";
 
 function Login({ handleShowInfoMessage, onLogin }) {
   const defaultValues = {
@@ -23,7 +23,8 @@ function Login({ handleShowInfoMessage, onLogin }) {
     event.preventDefault();
     auth
     .authorize(inputs)
-    .then((res) => {
+    .then(res => {
+      if (res.token) localStorage.setItem('token', res.token);
       resetForm();
       onLogin();
       navigate("/");
