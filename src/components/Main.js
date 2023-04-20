@@ -14,13 +14,14 @@ function Main({
   cards,
   onCardLike,
   onCardDelete,
+  email,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <>
-     <Header isWrappable={true}>
-        <p className="header__menu-item">email@email.ru</p>
+      <Header isWrappable={true}>
+        <p className="header__menu-item">{email}</p>
         <button href="#" className="header__menu-item">Выйти</button>
       </Header>
 
