@@ -22,29 +22,30 @@ function Login({ handleShowInfoMessage, onLogin }) {
   function handleSubmit(event) {
     event.preventDefault();
     auth
-    .authorize(inputs)
-    .then(res => {
-      if (res.token) localStorage.setItem('token', res.token);
-      resetForm();
-      onLogin();
-      navigate("/");
-    })
-    .catch((err) => {
-      const text = err.message || "Что-то пошло не так! Попробуйте еще раз.";
-      handleShowInfoMessage({
-        text: text,
-        isSuccess: false,
+      .authorize(inputs)
+      .then(res => {
+        if (res.token) localStorage.setItem('token', res.token);
+        resetForm();
+        onLogin();
+        navigate("/");
+      })
+      .catch((err) => {
+        const text = err.message || "Что-то пошло не так! Попробуйте еще раз.";
+        handleShowInfoMessage({
+          text: text,
+          isSuccess: false,
+        });
       });
-    });
-}
-
-function resetForm() {
-  setInputs({ ...defaultValues });
   }
+
+  function resetForm() {
+    setInputs({ ...defaultValues });
+  }
+
   return (
     <>
       <Header>
-      <Link to="/sign-up" className="header__menu-item">
+        <Link to="/sign-up" className="header__menu-item">
           Регистрация
         </Link>
       </Header>
@@ -71,7 +72,7 @@ function resetForm() {
               onChange={handleChange}
               required
             />
-             <button rype="submit" className="login__submit-button">
+            <button rype="submit" className="login__submit-button">
               Войти
             </button>
           </form>

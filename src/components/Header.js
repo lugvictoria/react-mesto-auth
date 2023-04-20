@@ -1,4 +1,5 @@
 import React from "react";
+
 import logo from "../images/header__logo_light.svg";
 
 function Header({ children, isWrappable }) {
@@ -7,6 +8,7 @@ function Header({ children, isWrappable }) {
   function handleOpenMenu() {
     setIsMenuOpened((state) => !state);
   }
+
   return (
     <header
       className={
@@ -19,6 +21,7 @@ function Header({ children, isWrappable }) {
         alt="Сервис Место-Россия. Логотип"
         className="header__logo"
       />
+
       {isWrappable && (
         <button
           type="button"
@@ -49,4 +52,5 @@ function Header({ children, isWrappable }) {
     </header>
   );
 }
+
 export default Header;

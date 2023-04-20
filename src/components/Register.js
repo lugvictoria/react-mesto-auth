@@ -10,6 +10,7 @@ function Register({ handleShowInfoMessage }) {
   };
 
   const [inputs, setInputs] = React.useState(defaultValues);
+
   const navigate = useNavigate();
 
   function handleChange(event) {
@@ -21,33 +22,32 @@ function Register({ handleShowInfoMessage }) {
   function handleSubmit(event) {
     event.preventDefault();
     auth
-    .register(inputs)
-    .then((res) => {
-      handleShowInfoMessage({
-        text: "Вы успешно зарегистрировались!",
-        isSuccess: true,
+      .register(inputs)
+      .then((res) => {
+        handleShowInfoMessage({
+          text: "Вы успешно зарегистрировались!",
+          isSuccess: true,
+        });
+        resetForm();
+        navigate("/sign-in");
+      })
+      .catch((err) => {
+        const text = err.message || "Что-то пошло не так! Попробуйте еще раз.";
+        handleShowInfoMessage({
+          text: text,
+          isSuccess: false,
+        });
       });
-      resetForm();
-      navigate("/sign-in");
-    })
-    .catch((err) => {
-      const text = err.message || "Что-то пошло не так! Попробуйте еще раз.";
-      handleShowInfoMessage({
-        text: text,
-        isSuccess: false,
-      });
-    });
-}
+  }
 
-function resetForm() {
-  setInputs({ ...defaultValues });
+  function resetForm() {
+    setInputs({ ...defaultValues });
   }
 
   return (
-    
     <>
       <Header>
-      <Link to="/sign-in" className="header__menu-item">
+        <Link to="/sign-in" className="header__menu-item">
           Войти
         </Link>
       </Header>
@@ -74,15 +74,12 @@ function resetForm() {
               onChange={handleChange}
               required
             />
-             <button rype="submit" className="login__submit-button">
+            <button rype="submit" className="login__submit-button">
               Зарегистрироваться
             </button>
-          </form>   Уже зарегистрированы?{" "}
-            <Link className="login__link" to="/sign-in">
-              Войти
-            </Link>
+          </form>
           <p className="login__extra-text">
-          Уже зарегистрированы?{" "}
+            Уже зарегистрированы?{" "}
             <Link className="login__link" to="/sign-in">
               Войти
             </Link>

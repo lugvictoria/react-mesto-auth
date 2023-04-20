@@ -1,17 +1,25 @@
 function InfoPopup({ message, onClose }) {
+  function handleOverlayClick(event) {
+    if (event.target === event.currentTarget) onClose(event);
+  }
+
   return (
-    <div className={`popup popup_type_info` + (message ? " popup_opened" : "")}>
+    <div
+      className={`popup popup_type_info` + (message ? " popup_opened" : "")}
+      onClick={handleOverlayClick}
+    >
       <div className="popup__container content__element">
         <p
           className={
             "popup__info-message" +
-            (message &&
-              (message.isSuccess
+            (message
+              ? message.isSuccess
                 ? " popup__info-message_type_success"
-                : " popup__info-message_type_fail"))
+                : " popup__info-message_type_fail"
+              : "")
           }
         >
-          {message && message.text}
+          {message ? message.text : " "}
         </p>
 
         <button
