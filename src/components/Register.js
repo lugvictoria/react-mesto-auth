@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import * as auth from "./auth";
+import * as auth from "../utils/auth";
 
 function Register({ handleShowInfoMessage }) {
   const defaultValues = {
@@ -10,6 +10,7 @@ function Register({ handleShowInfoMessage }) {
   };
 
   const [inputs, setInputs] = React.useState(defaultValues);
+  const navigate = useNavigate();
 
   function handleChange(event) {
     const value = event.target.value;
@@ -27,6 +28,7 @@ function Register({ handleShowInfoMessage }) {
         isSuccess: true,
       });
       resetForm();
+      navigate("/sign-in");
     })
     .catch((err) => {
       const text = err.message || "Что-то пошло не так! Попробуйте еще раз.";

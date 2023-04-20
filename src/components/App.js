@@ -15,7 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 import api from "../utils/api";
-import * as auth from "../auth";
+import * as auth from "../utils/auth";
 
 function App() {
   // Состояние попапов
@@ -155,14 +155,14 @@ function App() {
         })
         .catch(console.error);
     }
-  }, []);
+  }, [navigate]);
 
   function handleLogin() {
     setIsLoggedIn(true);
   }
 
   function handleLogout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setIsLoggedIn(false);
   }
 
