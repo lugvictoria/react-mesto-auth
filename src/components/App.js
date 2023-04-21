@@ -154,7 +154,7 @@ function App() {
         })
         .catch(console.error);
     }
-  }, [navigate]);
+  }, []);
 
   function handleLogin() {
     setIsLoggedIn(true);
