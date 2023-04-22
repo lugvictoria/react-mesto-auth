@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import auth from "../utils/auth";
 
-function Login({ handleShowInfoMessage, onLogin }) {
+function Login({ handleShowInfoMessage, onLogin, setEmail }) {
   const defaultValues = {
     email: "",
     password: "",
@@ -28,6 +28,7 @@ function Login({ handleShowInfoMessage, onLogin }) {
         resetForm();
         onLogin();
         navigate("/");
+        setEmail(inputs.email);
       })
       .catch((err) => {
         const text = err.message || "Что-то пошло не так! Попробуйте еще раз.";
