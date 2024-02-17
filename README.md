@@ -24,4 +24,4 @@
 Открыть сайт в браузере https://lugvictoria.github.io/react-mesto-auth
 
 Статус разработки
-✅ В разработке
+✅ Завершено
